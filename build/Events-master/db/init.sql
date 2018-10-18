@@ -25,6 +25,6 @@ UNLOCK TABLES;
 
 -- Insert an event of the resturant in the events table:
 INSERT INTO events (event_id, user_id, event_date, meny_id) VALUES 
-  (1, 1, Convert(DateTime,'20181026',112), 5);
+  (1, 1,'2018-12-12', 5);
 
 SELECT 'DATABASE INITIALIZED!' AS '';

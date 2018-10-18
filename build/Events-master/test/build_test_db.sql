@@ -14,10 +14,10 @@ CREATE TABLE IF NOT EXISTS events (
 TRUNCATE events;
 
 INSERT INTO events (event_id, user_id, event_date, meny_id) VALUES 
-  (1, 1, Convert(DateTime,'20181026',112), 5),
-  (2, 1, Convert(DateTime,'20181026',112), 3),
-  (3, 2, Convert(DateTime,'20181126',112), 5),
-  (4, 1, Convert(DateTime,'20181226',112), 6),
-  (6, 1, Convert(DateTime,'20180926',112), 2),
-  (7, 1, Convert(DateTime,'20181026',112), 6),
-  (8, 1, Convert(DateTime,'20181026',112), 2);
+  (1, 1, '2018-10-23', 5),
+  (2, 1, '2018-10-10', 3),
+  (3, 2, '2018-12-12', 5),
+  (4, 1, '2018-09-21', 6),
+  (6, 1, '2018-12-11', 2),
+  (7, 1, '2018-10-11', 6),
+  (8, 1, '2018-11-21', 2);
