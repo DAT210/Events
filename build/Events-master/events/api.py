@@ -11,6 +11,7 @@ def test():
 	print(f"TEST: {dbb}")
 	return jsonify({'test': "Success!"})
 
+#Update/Modify
 @bp.route('/events/', methods=['PATCH'])
 def set_event_id():
 	if not request.json or not 'event_id' in request.json:
@@ -21,13 +22,13 @@ def set_event_id():
 
 @bp.route('/events/<string:event_id>', methods=['GET'])
 def get_event_id(event_id):
-	r = events.get(event_id)
-	if r is None:
+	Event = events.get(event_id)
+	if Event is None:
 		abort(400)
 	x = {
-		'id': event_id,
-		'event': r,
-		'description': f"ID: {event_id} has the event {r}"
+		'event id': event_id,
+		'user id': Event,
+		'description': f"ID: {event_id} has the event {Event}"
 	}
 	return jsonify(x)
 	
@@ -53,8 +54,8 @@ def remove_event_id(event_id):
 def not_found(error):
 	return make_response(jsonify({'error': {
 		'code': 404,
-		'message': "Some message.",
-		'type': "The type of error."
+		'message': "The event_id you were trying to reach on the website couldn't be found on the database",
+		'type': "Event Not Found Error."
 	}}), 404)
 
 @bp.errorhandler(400)
@@ -63,6 +64,6 @@ def none_type(error):
 		'error': {
 			'code': 400,
 			'message': "The specified id does not exist.",
-			'type': "MEH"
+			'type': "Bad Request Error"
 		}
 	}))
