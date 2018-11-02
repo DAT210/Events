@@ -1,7 +1,7 @@
 from flask import (
 	Flask, g, jsonify, make_response, request, abort, Blueprint
 )
-import events, db
+import event, db
 
 bp = Blueprint('api',__name__,url_prefix='/api/1.0')
 
@@ -16,13 +16,13 @@ def test():
 def set_event_id():
 	if not request.json or not 'event_id' in request.json:
 		abort(400)
-	events.set(event_id, user_id, event_date, meny_id)
+	event.set(event_id, user_id, event_date, meny_id)
 	return jsonify({'ok': 'success'})
 
 
 @bp.route('/events/<string:event_id>', methods=['GET'])
 def get_event_id(event_id):
-	Event = events.get(event_id)
+	Event = event.get(event_id)
 	if Event is None:
 		abort(400)
 	x = {
@@ -41,12 +41,12 @@ def get_events():
 
 @bp.route('/events', methods=['POST'])
 def add_event_id():
-	events.add(event_id)
+	event.add(event_id)
 	return jsonify({'ok': 'success'})
 
 @bp.route('/events/<string:event_id>', methods=['DELETE'])
 def remove_event_id(event_id):
-	events.remove(event_id)
+	event.remove(event_id)
 	return jsonify({'ok': 'success'})
 
 # Error handling:
