@@ -118,10 +118,10 @@ The GET method of the API request could return two different results depending o
 {
   'status': 'success',
   'data':{
-    'reviews':[{
-      'event id': <id_of_the_object>(str),
-      'user id': <Customer_id_owner_of_the_event>(str),
-      'description': <description>(str)
+    'events':[{
+      'event_id': <id_of_the_object>(int),
+      'user_id': <Customer_id_owner_of_the_event>(int),
+      'event_description': <description>(str)
     }]
   }
 }
@@ -129,11 +129,152 @@ The GET method of the API request could return two different results depending o
 
 If the request was successful the 'status' field of the json reply will be 'success', and the 'reviews' field will contain an array of smaller jsons which contains the ID of the event as a string, the user/customer which booked the event as a string, and a description of the object as a string.
 
+Specific:
+The specific format will only get the rating of a specified ID, and to do this the following call is made with a GET method:
+
+	http://<host>/api/1.0/events/<ID>/
+
+Where <ID> is the ID of the booking one wants the data of. This will return a json in the following format:
+Standard:
+
+
+    {
+      'status': 'success',
+      'data':{
+        'events':[{
+        'event_id': <id_of_the_object>(int),
+        'event_name': <name_of_the_object>(str),
+        'event_date': <date_of_the_object>(str),
+        'user_id': <Customer_id_owner_of_the_event>(int),
+        'event_description': <event_description>(str)
+        }]
+      }
+    }
+Like the standard the discription field will contain some text, elsewise it will be null. 
+
+
+
+
+### API POST:
+The POST method of the API request is used for adding a new Event, on a successful request the API will return a HTTP status code of 201. The request must contain a json in the following format:
+
+    {
+      'data': [
+        'event_id': <id_of_the_object>(int),
+        'event_name': <name_of_the_object>(str),
+        'event_date': <date_of_the_object>(str),
+        'user_id': <Customer_id_owner_of_the_event>(int),
+        'event_description': <event_description>(str)
+      ]
+    }
+Where the 'data' field contains a list of the data which is needed to create a new event:
+
+| key | Discription | Type/format |
+| ------ | ------ | ------ |
+| event_id | ID of the event  | int
+| event_name| Tittle of the event | Str
+| event_date| Date of the event | date / `'YYYY-MM-DD'`
+| user_id| ID of the customer | Str
+| event_description| Description of the | Str
+
+If one fail none will be added.
+Returns the following json format on success:
+
+    {
+      'status': 'success',
+      'data': null
+    }
+
+
+
+### API PATCH:
+The PATCH method of the API request is used for updating the data of an event ID, on a successful request the API will return a HTTP status code of 200. The request must contain a json in the following format:
+
+
+    {
+      'data': [
+        'event_id': <id_of_the_object>(int),
+        'event_name': <name_of_the_object>(str),
+        'event_date': <date_of_the_object>(str),
+        'user_id': <Customer_id_owner_of_the_event>(int),
+        'event_description': <event_description>(str)
+      ]
+    }
+
+Where <id_of_the_object> is the ID of the event being updated, and <name_of_the_object> is the name being set. Be aware that the event_id and user_id must be an integer. The  <name_of_the_object> and <event_description>  and is just a string of maxiumum 50 characters. On a successful execution the following json format will be returned:
+
+    {
+      'status': 'success',
+      'data': null
+    }
+
+
+### API DELETE:
+The DELETE method of the API request is used for removing an object and it's data, on a successful deletion the API will return a HTTP status code of 200. It has the same call format as the specific GET call, but with a DELETE method:
+
+    http://<host>/api/1.0/events/<ID>/
+Where <ID> is the ID of the object being removed.
+On a successful execution the following json format will be returned:
+
+    {
+      'status': 'success',
+      'data': null
+    }
+    
+#### API ERROR:
+Whenever a failure or error occour an API Error will be raised, this can easily be detected by checking the 'status' field of the json response, if the field is 'error' instead of 'success' this will be the format of the json response:
+
+    {
+      'status': 'error',
+      'data': {
+        'error': {
+          'code': <error_code>,
+          'message': <error_message>,
+          'type': <error_type>
+        }
+      }
+    }
+The <error_code> will be the same code as the HTTP status code, which will either be 400 if it's a 'Bad Request', 404 if it's 'Not Found', and a 409 if there's a 'Conflict'.
+
+
+
+### Tests
+Describe and show how to run the tests with code examples. Explain what these tests test and why.
+
+    Give an example
+
+### Database
+Explaining what database (and version) has been used. Provide download links. Documents your database design and schemas, relations etc...
+
+### Licensing
+State what the license is and how to find the text version of the license.
+
+
+### Docker 
+If you are getting some errors in Docker, here are som usefull commands that you may try:
+##### Show all running containers
+    docker container ls
+
+##### Delete all containers
+    docker rm $(docker ps -a -q)
+##### Delete all images
+    docker rmi $(docker images -q)
+##### Run: 
+    docker-compose up --build
+
+By default, the Docker will expose port 8080, so change this within the Dockerfile if necessary. When ready, simply use the Dockerfile to build the image.
+
+
+### Todos
+
+ - Write MORE Tests
+ - Add Night Mode
+ - Better API
+
+
 
 
    [showevents]: <http://localhost:4500/show-events>
    [editevents]: <http://localhost:4500/edit-events>
    [createevent]: <https://github.com/joemccann/dillinger/tree/master/plugins/googledrive/README.md>
-   [PlOd]: <https://github.com/joemccann/dillinger/tree/master/plugins/onedrive/README.md>
-   [PlMe]: <https://github.com/joemccann/dillinger/tree/master/plugins/medium/README.md>
-   [PlGa]: <https://github.com/RahulHP/dillinger/blob/master/plugins/googleanalytics/README.md>
+
