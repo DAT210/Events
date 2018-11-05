@@ -246,11 +246,8 @@ Describe and show how to run the tests with code examples. Explain what these te
 ### Database
 Explaining what database (and version) has been used. Provide download links. Documents your database design and schemas, relations etc...
 
-### Licensing
-State what the license is and how to find the text version of the license.
 
-
-### Docker 
+## Docker 
 If you are getting some errors in Docker, here are som usefull commands that you may try:
 ##### Show all running containers
     docker container ls
