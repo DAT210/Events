@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div id="events">
+    <ul id="events_list">
+    {% for event in events %}
+        <li><a href=# onclick="displayEvent({{event.event_id}})" >{{event.event_name}}   {{event.event_date}}</a></li>
+        <div id={{event.event_id}} style=display:none class=hidden>
+            {{event.event_description}}
+            </div>
+    {% endfor %}
+        
+    </ul>
+</div>
+
+{% endblock %}
+

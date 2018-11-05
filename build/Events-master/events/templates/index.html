@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+    <title>index</title>
+    <link rel="stylesheet" href="/static/css/style.css"/>
+    <script src="static/js/script.js"></script>
+    </head>
+<body>
+<main>
+    <ul>
+        <li><a href="{{ url_for("showEvents") }}">Show events</a></li>
+        <li><a href="{{ url_for("editEvents") }}">Edit events</a></li>
+        <li><a href="#">Create events</a></li>
+    </ul>
+    {% block content %}{% endblock %}
+</main>
+</body>
+</html>

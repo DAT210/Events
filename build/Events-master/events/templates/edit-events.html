@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div id="events">
+    Public Events:
+    <ul id="events_list">
+    {% for event in publicEvents %}
+        
+    <form action="{{ url_for("updateEventInfo") }}" method="POST">
+        <li>{{event.event_name}}   {{event.event_date}}</li>
+        <button onclick= "displayEvent({{event.event_id}})">edit</button>
+        <div id={{event.event_id}} style=display:none class=hidden>
+            <br/>
+            <div>
+                <label for="event_name">Event name:</label>
+                <input type="text" name="event_name" id="name" size="30" value="{{event.event_name}}">
+            </div>
+            <div>
+                <label for="date">Date:</label>
+                <input type="date" name="event_date" id="date" size="30" value="{{event.event_date}}">
+            </div>
+            <div>
+                <label for="event_description">Event description:</label>
+                <textarea name="event_description" id="event_description" style=width:245px rows="7">{{event.event_description}}</textarea>
+            </div>
+            <input type="hidden" name="publicEvents" value="{{event.publicEvents}}"/>
+            <input type="hidden" name="event_id" value="{{event.event_id}}"/>
+            <input type="submit" value="Edit event"/>
+        </div>
+    </form>
+    {% endfor %}
+    </ul>
+</div>
+
+<div id="events">
+    Public Events:
+    <ul id="events_list">
+    {% for event in privateEvents %}
+        <li>{{event.event_name}}   {{event.event_date}}</li>
+        <button>Edit</button>
+    {% endfor %}
+    </ul>
+</div>
+
+
+{% endblock %}
