@@ -265,7 +265,6 @@ By default, the Docker will expose port 8080, so change this within the Dockerfi
 ### Todos
 
  - Write MORE Tests
- - Add Night Mode
  - Better API
 
 
