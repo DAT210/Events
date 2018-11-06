@@ -8,10 +8,9 @@ def set(event_id, publicEvent, event_date, event_name, event_description):
 	try:
 		cursor.execute("""
 			UPDATE events 
-			SET publicEvent%s, event_date=%s , event_name=%s, event_description=%s 
+			SET publicEvent=%s, event_date=%s, event_name=%s, event_description=%s 
 			WHERE event_id=%s
 		""",(publicEvent, event_date, event_name, event_description, event_id))
-		database.commit()
 		database.commit()
 	except db.mysql.connector.Error as err:
 		print(f"Error_set: {err}")
@@ -70,12 +69,12 @@ def remove(id):
 		cursor.close()
 	return
 
-def add(id):
+def add(publicEvent, event_date, event_name, event_description):
 	database = db.get_db()
 	cursor = database.cursor()
 	try:
-		sql = "INSERT INTO events (event_id, user_id, event_date, meny_id) VALUES (%s, 0, 0, 0)"
-		cursor.execute(sql, (id,))
+		sql = "INSERT INTO events (publicEvent, event_date, event_name, event_description) VALUES (%s, %s, %s, %s)"
+		cursor.execute(sql, (publicEvent, event_date, event_name, event_description))
 		database.commit()
 	except db.mysql.connector.Error as err:
 		print(f"Error_add: {err}")

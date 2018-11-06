@@ -22,13 +22,8 @@ except OSError:
 import db
 db.init_app(app)
 
-
 import api
 app.register_blueprint(api.bp)
-
-@app.route('/')
-def hello():
-	return app.send_static_file("index.html")
 
 @app.route('/booking')
 def booking():
@@ -49,6 +44,16 @@ def editEvents():
 	privateEvents = event.getPrivateEvents()
 	return render_template("edit-events.html", publicEvents=publicEvents, privateEvents=privateEvents)
 
+
+@app.route("/create-public-event", methods=["POST"])
+def createPublicEvent():
+	publicEvent = request.form.get("publicEvent")
+	event_date = request.form.get("event_date")
+	event_name = request.form.get("event_name")
+	event_description = request.form.get("event_description")
+	event.add(publicEvent, event_date, event_name, event_description)
+	return editEvents()
+
 @app.route("/deleteEvent/<int:event_id>")
 def deleteEvent(event_id):
 	event.remove(event_id)
@@ -62,8 +67,7 @@ def updateEventInfo():
 	event_date = request.form.get("event_date")
 	event_description = request.form.get("event_description")
 	event.set(event_id, publicEvent, event_date, event_name, event_description)
-	return render_template("edit-events.html", publicEvents= event.getPublicEvents(), privateEvents=event.getPrivateEvents())
-
+	return editEvents()
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)

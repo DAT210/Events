@@ -3,14 +3,36 @@
 
 <div id="events">
     Public Events:
+    <button onclick="displayEvent('newEvent')">New</button>
+    <div id="newEvent" style=display:none class=hidden>
+        <form action="{{ url_for('createPublicEvent') }}" method="POST">
+            <br/>
+            <div>
+                <label for="event_name">Event name:</label>
+                <input type="text" name="event_name" id="name" size="30">
+            </div>
+            <div>
+                <label for="date">Date:</label>
+                <input type="date" name="event_date" id="date" size="30">
+            </div>
+            <div>
+                <label for="event_description">Event description:</label>
+                <textarea name="event_description" id="event_description" style=width:245px rows="7"></textarea>
+            </div>
+            <input type="hidden" name="publicEvents" value="NULL"/>
+            <button type="action">Create</button>
+        </form>    
+    </div>
+   
+
     <ul id="events_list">
     {% for event in publicEvents %}
     
         <li>{{event.event_name}}   {{event.event_date}}</li>
-        <button onclick="displayEvent({{event.event_id}})"> Edit</button>
-        <button> <a href="{{url_for('deleteEvent', event_id=event.event_id) }}">Delete</a></button>
+        <button onclick="displayEvent({{event.event_id}})" class="buttonPosition">edit</button>
+
         <form action="{{url_for('deleteEvent', event_id=event.event_id) }}">
-            <button type="action">delete</button>
+            <button type="action" class="buttonPosition">delete</button>
         </form>
 
         <div id={{event.event_id}} style=display:none class=hidden>
@@ -30,7 +52,7 @@
             </div>
             <input type="hidden" name="publicEvents" value="{{event.publicEvents}}"/>
             <input type="hidden" name="event_id" value="{{event.event_id}}"/>
-            <input type="submit" value="Edit event"/>
+            <button type="action">Save</button>
         </form>
         </div>
     {% endfor %}
@@ -38,7 +60,7 @@
 </div>
 
 <div id="events">
-    Public Events:
+    Private Events:
     <ul id="events_list">
     {% for event in privateEvents %}
         <li>{{event.event_name}}   {{event.event_date}}</li>
