@@ -239,9 +239,23 @@ The <error_code> will be the same code as the HTTP status code, which will eithe
 
 
 ### Tests
-Describe and show how to run the tests with code examples. Explain what these tests test and why.
+Test the Event GET by Date API
 
-    Give an example
+    http://127.0.0.1:4500/api/1.0/events/date/20181218
+    
+Test the Event GET by Event ID API
+
+    http://127.0.0.1:4500/api/1.0/events/2
+    
+ Test the Front end Booking #TODO
+
+    http://127.0.0.1:4500/booking
+    
+ Test the Front end Booking Demo
+
+    http://127.0.0.1:4500/demo
+        
+
 
 ### Database
 Explaining what database (and version) has been used. Provide download links. Documents your database design and schemas, relations etc...
