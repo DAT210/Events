@@ -94,3 +94,73 @@ def getPrivateEvents():
 		if event2.get("publicEvent") != None:
 			privateEvents.append(event2)
 	return privateEvents
+
+def get2(id):
+	database = db.get_db()
+	cursor = database.cursor()
+	try:
+		cursor.execute("LOCK TABLES events READ;")
+		sql = "SELECT * FROM events WHERE event_id=%s;"
+		cursor.execute(sql, (id,))
+		result = cursor.fetchone()
+		cursor.execute("UNLOCK TABLES;")
+		if result is not None:
+			(publicEvent, event_date, event_name, rating_2, event_description,) = result
+			result = (publicEvent, event_date, event_name, rating_2, event_description)
+		return result
+	except mysql.connector.Error as err:
+		return err
+	finally:
+		cursor.close()
+	return
+
+
+def pullById(id):
+	database = db.get_db()
+	cursor = database.cursor()
+	try:
+		events = []
+		sql = "SELECT * FROM events WHERE event_id=%s;"
+		cursor.execute(sql, (id,))
+		for(event_id, publicEvent, event_date, event_name, event_description) in cursor:
+			events.append({
+				"event_id" : event_id,
+				"publicEvent": publicEvent,
+				"event_date": event_date,
+				"event_name": event_name,
+				"event_description": event_description
+			})
+		return events
+	except mysql.connector.Error as err:
+		print(f"Error_get(): {err}")
+	finally:
+		cursor.close()
+	return
+
+def getByDate(id):
+	database = db.get_db()
+	cursor = database.cursor()
+	try:
+		events = []
+		sql = "SELECT * FROM events WHERE event_date=%s;"
+		cursor.execute(sql, (id,))
+		if not cursor.rowcount:
+    			events.append({
+					"date_busy": "False"
+				})
+		else:
+			for(event_id, publicEvent, event_date, event_name, event_description) in cursor:
+				events.append({
+					"event_id" : event_id,
+					"publicEvent": publicEvent,
+					"event_date": event_date,
+					"event_name": event_name,
+					"date_busy": True,
+					"event_description": event_description
+				})
+		return events
+	except mysql.connector.Error as err:
+		print(f"Error_get(): {err}")
+	finally:
+		cursor.close()
+	return

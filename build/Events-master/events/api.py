@@ -5,11 +5,19 @@ import event, db
 
 bp = Blueprint('api',__name__,url_prefix='/api/1.0')
 
+# Blueprints:
 @bp.route('/test', methods=['GET'])
 def test():
-	dbb = db.get_db()
-	print(f"TEST: {dbb}")
-	return jsonify({'test': "Success!"})
+	reply = {
+		'status': "Success",
+		'data': {
+			'id': 'test_id',
+			'rating': 5,
+			'description': "The id test_id has a rating of 5 stars."
+		}
+	}
+
+	return make_response(jsonify(reply)), 200
 
 #Update/Modify
 @bp.route('/events/', methods=['PATCH'])
@@ -19,18 +27,20 @@ def set_event_id():
 	event.set(event_id, user_id, event_date, meny_id)
 	return jsonify({'ok': 'success'})
 
-
+@bp.route('/events/<string:event_id>/', methods=['GET'])
 @bp.route('/events/<string:event_id>', methods=['GET'])
-def get_event_id(event_id):
-	Event = event.get(event_id)
+def get(event_id):
+	Event = event.pullById(event_id)
 	if Event is None:
 		abort(400)
-	x = {
-		'event id': event_id,
-		'user id': Event,
-		'description': f"ID: {event_id} has the event {Event}"
-	}
-	return jsonify(x)
+	return jsonify(Event)
+
+
+@bp.route('/events/date/<string:event_date>/', methods=['GET'])
+@bp.route('/events/date/<string:event_date>', methods=['GET'])
+def getByDate(event_date):
+	Event = event.getByDate(event_date)
+	return jsonify(Event)
 	
 
 @bp.route('/events', methods=['GET'])

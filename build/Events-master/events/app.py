@@ -30,6 +30,13 @@ app.register_blueprint(api.bp)
 def hello():
 	return app.send_static_file("index.html")
 
+@app.route('/booking')
+def booking():
+    return render_template("eventbooking.html")
+
+@app.route('/demo')
+def bookingtest():
+    return render_template("eventbooking_demo.html")
 
 @app.route("/show-events")
 def showEvents():
