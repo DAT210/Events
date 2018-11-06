@@ -49,6 +49,11 @@ def editEvents():
 	privateEvents = event.getPrivateEvents()
 	return render_template("edit-events.html", publicEvents=publicEvents, privateEvents=privateEvents)
 
+@app.route("/deleteEvent/<int:event_id>")
+def deleteEvent(event_id):
+	event.remove(event_id)
+	return editEvents()
+
 @app.route("/updateEventInfo", methods=["POST"])
 def updateEventInfo():
 	event_id = request.form.get("event_id")
@@ -57,7 +62,7 @@ def updateEventInfo():
 	event_date = request.form.get("event_date")
 	event_description = request.form.get("event_description")
 	event.set(event_id, publicEvent, event_date, event_name, event_description)
-	return render_template("edit-events.html", publicEvents= event.getPublicEvents(), privateEvents=privateEvents)
+	return render_template("edit-events.html", publicEvents= event.getPublicEvents(), privateEvents=event.getPrivateEvents())
 
 
 if __name__ == '__main__':

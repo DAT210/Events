@@ -6,8 +6,12 @@ def set(event_id, publicEvent, event_date, event_name, event_description):
 	database = db.get_db()
 	cursor = database.cursor()
 	try:
-		sql = "UPDATE events SET event_id=%s, publicEvent%s, event_date=%s , event_name=%s WHERE event_description=%s"
-		cursor.execute(sql, (event_id, publicEvent, event_date, event_name, event_description,))
+		cursor.execute("""
+			UPDATE events 
+			SET publicEvent%s, event_date=%s , event_name=%s, event_description=%s 
+			WHERE event_id=%s
+		""",(publicEvent, event_date, event_name, event_description, event_id))
+		database.commit()
 		database.commit()
 	except db.mysql.connector.Error as err:
 		print(f"Error_set: {err}")
