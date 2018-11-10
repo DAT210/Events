@@ -1,17 +1,42 @@
 {% extends "index.html" %}
 {% block content %}
 
-<div id="events">
-    <ul id="events_list">
-    {% for event in events %}
-        <li><a href=# onclick="displayEvent({{event.event_id}})" >{{event.event_name}}   {{event.event_date}}</a></li>
-        <div id={{event.event_id}} style=display:none class=hidden>
-            {{event.event_description}}
+<main role="main">
+
+        <section class="jumbotron text-center">
+          <div class="container">
+            <h1 class="jumbotron-heading">Public Events</h1>
+            <p class="lead text-muted">Here are the future events we are going to have in our restaurant. If you are a big group you also have the opportunity to book your own private event</p>
+            <p>
+              <a href="#" class="btn btn-primary my-2">Book private event</a>
+              <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+            </p>
+          </div>
+        </section>
+  
+        <div class="album py-5 bg-light">
+          <div class="container">
+            <div class="row">
+            {% for event in events %}
+              <div class="col-md-4">
+                <div class="card mb-4 box-shadow">
+                  <img class="card-img-top eventImage" onclick="displayEvent({{event.event_id}})" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text={{event.event_name}}" alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src=/static/images/{{event.event_image}} data-holder-rendered="true">
+                  <div id={{event.event_id}} class="card-body hidden" style=display:none >
+                    <p class="card-text">{{event.event_description}}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <a href="{{event.event_facebook_link}}" class="fa fa-facebook"></a>
+                      </div>
+                      <small class="text-muted"></small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
             </div>
-    {% endfor %}
-        
-    </ul>
-</div>
+          </div>
+        </div>
+  
+      </main>
 
-{% endblock %}
-
+      {% endblock %}

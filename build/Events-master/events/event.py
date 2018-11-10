@@ -2,15 +2,15 @@ import mysql.connector
 import db
 from flask import render_template
 
-def set(event_id, publicEvent, event_date, event_name, event_description):
+def set(event_id, publicEvent, event_date, event_name, event_description, event_facebook_link, event_image):
 	database = db.get_db()
 	cursor = database.cursor()
 	try:
 		cursor.execute("""
 			UPDATE events 
-			SET publicEvent=%s, event_date=%s, event_name=%s, event_description=%s 
+			SET publicEvent=%s, event_date=%s, event_name=%s, event_description=%s, event_facebook_link=%s, event_image=%s
 			WHERE event_id=%s
-		""",(publicEvent, event_date, event_name, event_description, event_id))
+		""",(publicEvent, event_date, event_name, event_description, event_id, event_facebook_link, event_image))
 		database.commit()
 	except db.mysql.connector.Error as err:
 		print(f"Error_set: {err}")
@@ -25,13 +25,15 @@ def pull():
 		events = []
 		sql = "SELECT * FROM events"
 		cursor.execute(sql)
-		for(event_id, publicEvent, event_date, event_name, event_description) in cursor:
+		for(event_id, publicEvent, event_date, event_name, event_description, event_facebook_link, event_image) in cursor:
 			events.append({
                 "event_id" : event_id,
                 "publicEvent": publicEvent,
                 "event_date": event_date,
                 "event_name": event_name,
-                "event_description": event_description
+                "event_description": event_description,
+				"event_facebook_link": event_facebook_link,
+				"event_image": event_image
             })
 		return events
 	except mysql.connector.Error as err:
@@ -69,12 +71,12 @@ def remove(id):
 		cursor.close()
 	return
 
-def add(publicEvent, event_date, event_name, event_description):
+def add(publicEvent, event_date, event_name, event_description, event_facebook_link, event_image):
 	database = db.get_db()
 	cursor = database.cursor()
 	try:
-		sql = "INSERT INTO events (publicEvent, event_date, event_name, event_description) VALUES (%s, %s, %s, %s)"
-		cursor.execute(sql, (publicEvent, event_date, event_name, event_description))
+		sql = "INSERT INTO events (publicEvent, event_date, event_name, event_description, event_facebook_link, event_image) VALUES (%s, %s, %s, %s, %s, %s)"
+		cursor.execute(sql, (publicEvent, event_date, event_name, event_description, event_facebook_link, event_image))
 		database.commit()
 	except db.mysql.connector.Error as err:
 		print(f"Error_add: {err}")

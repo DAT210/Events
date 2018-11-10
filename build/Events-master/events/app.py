@@ -51,7 +51,9 @@ def createPublicEvent():
 	event_date = request.form.get("event_date")
 	event_name = request.form.get("event_name")
 	event_description = request.form.get("event_description")
-	event.add(publicEvent, event_date, event_name, event_description)
+	event_facebook_link = request.form.get("event_facebook_link")
+	event_image = request.form.get("event_image")
+	event.add(publicEvent, event_date, event_name, event_description, event_facebook_link, event_image)
 	return editEvents()
 
 @app.route("/deleteEvent/<int:event_id>")
@@ -66,7 +68,8 @@ def updateEventInfo():
 	event_name = request.form.get("event_name")
 	event_date = request.form.get("event_date")
 	event_description = request.form.get("event_description")
-	event.set(event_id, publicEvent, event_date, event_name, event_description)
+	event_facebook_link = request.form.get("event_facebook_link")
+	event.set(event_id, publicEvent, event_date, event_name, event_description, event_facebook_link)
 	return editEvents()
 
 if __name__ == '__main__':
