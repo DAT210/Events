@@ -21,8 +21,10 @@
             </div>
             <div>
                 <label for="event_facebook_link">Facebook event link:</label>
-                <input type="text" name="event_facebook_link" id="event_facebook_link" size="40">
+                <input type="text" name="event_facebook_link" id="event_facebook_link" size="30" >
             </div>
+            <input type="file" onchange="previewFile()"><br>
+            <img src="" height="100" alt="Image preview...">
             <input type="hidden" name="publicEvents" value="NULL"/>
             <button type="action">Create</button>
         </form>    
@@ -51,7 +53,7 @@
             </div>
             <div>
                 <label for="event_facebook_link">Facebook event link:</label>
-                <input type="text" name="event_facebook_link" id="event_facebook_link" size="40" value="{{event.event_facebook_link}}">
+                <input type="text" name="event_facebook_link" id="event_facebook_link" size="30" value="{{event.event_facebook_link}}">
             </div>
             <input type="hidden" name="publicEvents" value="{{event.publicEvents}}"/>
             <input type="hidden" name="event_id" value="{{event.event_id}}"/>
