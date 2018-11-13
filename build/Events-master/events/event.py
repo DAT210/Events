@@ -149,10 +149,12 @@ def getByDate(id):
 		events = []
 		sql = "SELECT * FROM events WHERE event_date=%s;"
 		cursor.execute(sql, (id,))
-		if not cursor.rowcount:
-    			events.append({
-					"date_busy": "False"
-				})
+		if  cursor is None:
+			events.append({
+				"date_busy": "False"
+						})
+
+			events = ["false"]
 		else:
 			for(event_id, publicEvent, event_date, event_name, event_description) in cursor:
 				events.append({
@@ -160,9 +162,14 @@ def getByDate(id):
 					"publicEvent": publicEvent,
 					"event_date": event_date,
 					"event_name": event_name,
-					"date_busy": True,
+					"date_busy": "True",
 					"event_description": event_description
 				})
+		if not events:
+			events.append({
+		"date_busy": "False",
+		"event_description": "This date is not busy"
+			})	
 		return events
 	except mysql.connector.Error as err:
 		print(f"Error_get(): {err}")
