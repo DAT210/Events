@@ -45,7 +45,8 @@ def getByDate(event_date):
 
 @bp.route('/events', methods=['GET'])
 def get_events():
-   return jsonify({'events': 'N/A'})
+	Event = event.pull()
+	return jsonify(Event)
 
 
 
