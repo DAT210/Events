@@ -87,17 +87,20 @@
         </form>
     </div>
     {% endfor %}
-    </ul>
-    <ul id="events_list">
-    {% for event in privateEvents %}
-    <div class="card mb-4 box-shadow">
-        <h3><strong>{{event.event_name}}</strong>   {{event.event_date}}</h3>
-        <form action="{{url_for('deleteEvent', event_id=event.event_id) }}">
-                <button type="action" class="buttonPosition btn btn-danger btn-sm">delete</button>
-        </form>
-    </ul>
-    {% endfor %}
 </div>
 
+<div id="events">
+
+    <ul id="events_list">
+    {% for event2 in privateEvents %}
+    <div class="card mb-4 box-shadow">
+        <h6><strong>{{event2.event_name}}</strong>   {{event2.event_date}}</h6>
+        <form action="{{url_for('deleteEvent', event_id=event2.event_id) }}">
+                <button type="action" class="buttonPosition btn btn-danger btn-sm">delete</button>
+        </form>
+    </div>
+    {% endfor %}
+    </ul>
+</div>
 
 {% endblock %}

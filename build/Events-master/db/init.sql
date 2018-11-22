@@ -66,10 +66,10 @@ VALUES(NULL, "2019-3-18", "Easter Disaster", "Lorem ipsum dolor sit amet, consec
         vel augue vehicula rutrum. Nullam vitae sollicitudin orci.", "https://www.facebook.com/events/239880163310493/", "easter.jpg");
 
 INSERT into events(publicEvent, event_date, event_name)
-VALUES("","2019-2-18", "Gjerts Bursdag",NULL);
+VALUES("","2019-2-18", "Gjerts Bursdag");
 
 INSERT into events(publicEvent, event_date, event_name)
-VALUES("","2019-1-8", "Fredds Bursdag",NULL);
+VALUES("","2019-1-8", "Frida og Fredds frieri");
         
 INSERT into events(publicEvent, event_date, event_name, event_description, event_facebook_link, event_image)
 VALUES(NULL, "2019-2-28", "Extra day Party", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sodales neque quis nisi facilisis lobortis. Namefficitur eget nisi sit amet bibendum. Vestibulum elementum faucibus quam ut posuere. Vivamus pellentesque
