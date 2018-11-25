@@ -127,14 +127,16 @@ def pullById(id):
 		events = []
 		sql = "SELECT * FROM events WHERE event_id=%s;"
 		cursor.execute(sql, (id,))
-		for(event_id, publicEvent, event_date, event_name, event_description) in cursor:
+		for(event_id, publicEvent, event_date, event_name, event_description, event_facebook_link, event_image) in cursor:
 			events.append({
-				"event_id" : event_id,
-				"publicEvent": publicEvent,
-				"event_date": event_date,
-				"event_name": event_name,
-				"event_description": event_description
-			})
+                "event_id" : event_id,
+                "publicEvent": publicEvent,
+                "event_date": event_date,
+                "event_name": event_name,
+                "event_description": event_description,
+				"event_facebook_link": event_facebook_link,
+				"event_image": event_image
+            })
 		return events
 	except mysql.connector.Error as err:
 		print(f"Error_get(): {err}")
@@ -156,15 +158,17 @@ def getByDate(id):
 
 			events = ["false"]
 		else:
-			for(event_id, publicEvent, event_date, event_name, event_description) in cursor:
+			for(event_id, publicEvent, event_date, event_name, event_description, event_facebook_link, event_image) in cursor:
 				events.append({
 					"event_id" : event_id,
 					"publicEvent": publicEvent,
 					"event_date": event_date,
 					"event_name": event_name,
-					"date_busy": "True",
-					"event_description": event_description
+					"event_description": event_description,
+					"event_facebook_link": event_facebook_link,
+					"event_image": event_image
 				})
+	
 		if not events:
 			events.append({
 		"date_busy": "False",

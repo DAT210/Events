@@ -112,6 +112,83 @@ http://<host>/api/1.0/events/
 ```
 Where `<host>`  is the host address of the API server. e.g. `localhost:4500` or `192.168.99.100:4500`.
 
+
+#### List all events 
+```sh
+http://127.0.0.1:4500/api/1.0/events 
+```
+Will list all the registred events (public and private events) in json format:
+````sh
+[
+  {
+    "event_date": "Thu, 15 Nov 2018 00:00:00 GMT", 
+    "event_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.ci.", 
+    "event_facebook_link": "https://www.facebook.com/events/239880163310493/", 
+    "event_id": 1, 
+    "event_image": "mexican.png", 
+    "event_name": "Taco-Night", 
+    "publicEvent": null
+  },  {
+    "event_date": "Thu, 15 Nov 2018 00:00:00 GMT", 
+    "event_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.ci.", 
+    "event_facebook_link": "https://www.facebook.com/events/239880163310493/", 
+    "event_id": 1, 
+    "event_image": "mexican.png", 
+    "event_name": "Taco-Night", 
+    "publicEvent": null
+  }
+  ]
+````
+#### List a single event by event ID
+To list a singe event byt it's ID, use the following request format:
+```sh
+http://127.0.0.1:4500/api/1.0/events/EventID(INT)
+```
+The following  URL will get the information about event with ID = 4
+```sh
+http://127.0.0.1:4500/api/1.0/events/4
+```
+
+
+#### List a single event by event DATE
+To list a singe event by day, use the following request format:
+```sh
+http://127.0.0.1:4500/api/1.0/events/date/YYYYMMDD
+```
+The following  URL will get the information about event with on the 15/11/2018 
+```sh
+http://127.0.0.1:4500/api/1.0/events/date/20181115
+```
+The respons will show if there is an event on that spesific date or of the day is free.
+For http://127.0.0.1:4500/api/1.0/events/date/20181115 , the results will be :
+```sh
+[
+  {
+    "event_date": "Thu, 15 Nov 2018 00:00:00 GMT", 
+    "event_description": "Lorem ipsum dolor sit amet,vehicula rutrum. Nullam vitae sollicitudin orci.", 
+    "event_facebook_link": "https://www.facebook.com/events/239880163310493/", 
+    "event_id": 1, 
+    "event_image": "mexican.png", 
+    "event_name": "Taco-Night", 
+    "publicEvent": null
+  }
+]
+```
+
+If we try for date with is not busy, we will recive the following response:
+```sh
+http://127.0.0.1:4500/api/1.0/events/date/20281115
+```
+
+```sh
+[
+  {
+    "date_busy": "False", 
+    "event_description": "This date is not busy"
+  }
+]
+```
+
 ### API GET:
 The GET method of the API request could return two different results depending on the format of the call, but will always return a HTTP status code of 200 on a successful request.
 ````sh
@@ -239,23 +316,9 @@ The <error_code> will be the same code as the HTTP status code, which will eithe
 
 
 ### Tests
-Test the Event GET by Date API
+Describe and show how to run the tests with code examples. Explain what these tests test and why.
 
-    http://127.0.0.1:4500/api/1.0/events/date/20181218
-    
-Test the Event GET by Event ID API
-
-    http://127.0.0.1:4500/api/1.0/events/2
-    
- Test the Front end Booking #TODO
-
-    http://127.0.0.1:4500/booking
-    
- Test the Front end Booking Demo
-
-    http://127.0.0.1:4500/demo
-        
-
+    Give an example
 
 ### Database
 Explaining what database (and version) has been used. Provide download links. Documents your database design and schemas, relations etc...
@@ -279,6 +342,7 @@ By default, the Docker will expose port 8080, so change this within the Dockerfi
 ### Todos
 
  - Write MORE Tests
+ - Add Night Mode
  - Better API
 
 

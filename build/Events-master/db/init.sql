@@ -26,7 +26,7 @@ CREATE TABLE events2 (
 
 CREATE TABLE events (
   event_id MEDIUMINT NOT NULL AUTO_INCREMENT,
-  publicEvent CHAR(0) DEFAULT NULL,
+  publicEvent CHAR(10) DEFAULT NULL,
   event_date date NOT NULL,
   event_name VARCHAR(35) NOT NULL,
   event_description TEXT,
@@ -65,11 +65,15 @@ VALUES(NULL, "2019-3-18", "Easter Disaster", "Lorem ipsum dolor sit amet, consec
         Praesent volutpat sit amet massa nec ultricies. Curabitur sollicitudin pharetra tortor in dictum. In mattis orci
         vel augue vehicula rutrum. Nullam vitae sollicitudin orci.", "https://www.facebook.com/events/239880163310493/", "easter.jpg");
 
-INSERT into events(publicEvent, event_date, event_name)
-VALUES("","2019-2-18", "Gjerts Bursdag");
+INSERT into events(publicEvent, event_date, event_name,event_image)
+VALUES("","2019-2-18", "Gjerts Bursdag","birthday.png");
 
-INSERT into events(publicEvent, event_date, event_name)
-VALUES("","2019-1-8", "Frida og Fredds frieri");
+
+INSERT into events(publicEvent, event_date, event_name,event_image)
+VALUES("","2019-3-18", "Evry Team building","Business_meeting.png");
+
+INSERT into events(publicEvent, event_date, event_name,event_image)
+VALUES("","2019-1-8", "Frida og Fredds frieri","wedding.jpg");
         
 INSERT into events(publicEvent, event_date, event_name, event_description, event_facebook_link, event_image)
 VALUES(NULL, "2019-2-28", "Extra day Party", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sodales neque quis nisi facilisis lobortis. Namefficitur eget nisi sit amet bibendum. Vestibulum elementum faucibus quam ut posuere. Vivamus pellentesque

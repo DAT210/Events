@@ -24,7 +24,7 @@ def test():
 def set_event_id():
 	if not request.json or not 'event_id' in request.json:
 		abort(400)
-	event.set(event_id, user_id, event_date, meny_id)
+		event.set(event_id, publicEvent, event_date, event_name, event_description, event_facebook_link, event_image)
 	return jsonify({'ok': 'success'})
 
 @bp.route('/events/<string:event_id>/', methods=['GET'])
