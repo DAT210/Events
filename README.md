@@ -20,13 +20,60 @@
     * [API DELETE](#api-delete)
     * [API ERROR](#api-error)
 
-Events is a part of a webpage which will be used to book events in a restaurent. The app will allow cutomer to check dates for avililbality, and to send  orders to the restaurent owner. It check the dates in the databas and return a live results, giving the customers the value of beeing able to submit an order without needing to wait for a confirmation from the restaurent. The Events-booking page is programmed ussing pyhong, flask , javascrpipt and bootstrap.
+Events is a part of a webpage which will be used to book events in a restaurent. The app will allow cutomer to check dates for avililbality, and to send  orders to the restaurent owner. It check the dates in the databas and return a live results, giving the customers the value of beeing able to submit an order without needing to wait for a confirmation from the restaurent. The Events-booking page is programmed ussing python, flask , javascrpipt and bootstrap.
 
-  - Type some Markdown on the left
-  - See HTML in the right
-  - Magic
+# Application sections
+The application has tow sections. Fron end, which is open for customers, and a back-end/admin page which gives access to administrate public and private events. Also it gives access to show all the private and the public events.
 
-# Events API Features!
+
+The index page is made to fit 100% of the screen width.That allows the application to be integrated into any part of the main website using The HTML <iframe> Tag.  following table shows direct links for each partand section of the events-service:
+
+
+| Function | URL |
+| ------ | ------ |
+| index | [http://`<host>`/][showevents] |
+| Admin page | [http://`<host>`/admin][editevents] |
+| Show private events | [http://`<host>`/show-private-events][editevents] |
+| Show Public events | [http://`<host>`/][editevents] |
+| Edit/add public events | [http://`<host>`/edit-events][editevents] |
+| Edit private events | [http://`<host>`/edit-private-events][editevents] |
+
+## Front end
+
+```sh
+http://<host>/ 
+http://127.0.0.1:4500/
+```
+The front end or the Index has the fowllowing functions/Features:
+  - Check avaiable dates for private event-booking
+  - Book a private event and get confirmation
+  - A booking form if the checked date is avaiable
+  - list of the upcomming public events
+  
+### How it works
+##### Private event booking
+The customer chooses a date then click on "Check avaiablity" . If the choosen date is busy, the customer will get a notification with red background, telling him that that date is busy. If the choosen date is not busy, an event-booking form will be shown with a green background. The user needs to fill in the requested fields then click on book to send the order. He will then get a confirmation message on the screen. 
+
+##### Show upcomming events
+By opening the index/front end page, it will show the upcomming public events. The events will be listet with blocks. The block contains the tittle, date and image of the event. If user clicks on the image, it will then show details and a facebook link of the public event. 
+
+# Admin page
+The admin page contais a top menu. This page should be shown only to the administrator of the website, because by accessing this page, the user will get the access to modify events and will get access to create new public events.
+
+The URL for the admin page is http://<host>/ . In our case it is http://127.0.0.1:4500/admin .
+
+The function avaiable for the admin are shown on the table. 
+| Function | URL |
+| ------ | ------ |
+| Admin page | [http://`<host>`/admin][editevents] |
+| Show private events | [http://`<host>`/show-private-events][editevents] |
+| Show Public events | [http://`<host>`/][editevents] |
+| Edit/add public events | [http://`<host>`/edit-events][editevents] |
+| Edit private events | [http://`<host>`/edit-private-events][editevents] |
+
+
+# Events API
+### Events API Features!
 
   - Runs as a service
   - Uses athors service's API to get data and provide an API -JSON format output. 
@@ -34,7 +81,7 @@ Events is a part of a webpage which will be used to book events in a restaurent.
 
 
 It can also:
-  - Check avaiable dates for event booking
+  - Check avaiable dates for private event-booking
   - Add,Edit and deltet exsting bookings
   - Show results using an easy webinterface. 
 
@@ -68,18 +115,15 @@ git clone https://github.com/DAT210/Events.git
 ```
 
 When the repository is successfully cloned it's time to run Run in Docker:
-To run the API server in Docker is fairly easy as long as one have Docker installed. Just change directory into Events-master
-```sh
-build\Events-master
-```
-Then use the following command there:
+To run the API server in Docker is fairly easy as long as one have Docker installed. Just use the following command there:
 
 ```sh
 docker-compose up --build
 ```
 This will build a Python and a MySQL image and run them in two different containers, and the database will be initialized on the first build.
 
-### Front Ends
+### Front End
+To use the front end, simply open the fo
 ##### Frond End (Admin):
 The administrator of the website will get access to the following features:
 * Show events
@@ -338,12 +382,6 @@ If you are getting some errors in Docker, here are som usefull commands that you
 
 By default, the Docker will expose port 8080, so change this within the Dockerfile if necessary. When ready, simply use the Dockerfile to build the image.
 
-
-### Todos
-
- - Write MORE Tests
- - Add Night Mode
- - Better API
 
 
 

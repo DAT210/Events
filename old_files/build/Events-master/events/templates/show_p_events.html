@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+{% block content %}
+
+<main role="main">
+
+        <section class="jumbotron text-center">
+          <div class="container">
+            <h1 class="jumbotron-heading">Private Events</h1>
+            <p class="lead text-muted">Here are a list of the private events we are going to have in our restaurant. If you are a big group you also have the opportunity to book your own private event</p>
+            <p>
+              <a href="{{ url_for("booking") }}" class="btn btn-primary my-2">Book private event</a>
+            </p>
+          </div>
+        </section>
+  
+  <!-- List the private events -->
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <h2>Private Events</h2>
+              <div class="row">
+              {% for event in pEvents %}
+                <div class="col-md-4">
+                  <div class="card mb-4box-shadow">
+                    <div class="alert alert-success" style=margin-bottom:0rem><strong>{{event.event_name}}</strong> {{event.event_date}}</div>
+                    <img class="card-img-top eventImage" onclick="displayEvent({{event.event_id}})" style="height: 225px; width: 100%; display: block;" src=/static/images/{{event.event_image}} data-holder-rendered="true">
+                    <div id={{event.event_id}} class="card-body hidden" style=display:none >
+                      <p class="bg-info">Event ID: "{{event.event_id}}"</p>
+                      <p> <strong>Name:</strong>"{{event.event_name}}"</p>
+                      <p><strong>Email: </strong>"{{event.event_facebook_link}}"</p>
+                      <p><strong>Date: </strong>"{{event.event_date}}"</p>
+                      <p ><strong>Comments:</strong> "{{event.event_description}}</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                    
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+
+
+      </main>
+
+      {% endblock %}

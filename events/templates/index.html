@@ -1,7 +1,8 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-    <title>index</title>
+    <title>Admin</title>
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="static/css/style.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -9,12 +10,13 @@
     </head>
 <body>
 <main>
+    <!-- Top menu -->
     <ul>
         <li><a href="{{ url_for("showEvents") }}">Show Public events</a></li>
         <li><a href="{{ url_for("showPEvents") }}">Show private events</a></li>
         <li><a href="{{ url_for("editEvents") }}">Edit Public events</a></li>
         <li><a href="{{ url_for("editPEvents") }}">Edit Private events</a></li>
-        <li><a href="#">Create events</a></li>
+        <li><a href="/">Frontend</a></li>
     </ul>
     {% block content %}{% endblock %}
 </main>

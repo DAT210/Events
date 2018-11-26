@@ -5,11 +5,14 @@
     Public Events2:
 
 
+      <!-- List the private events -->
     <ul id="events_list">
     {% for event in privateEvents %}
     <div class="card mb-4 box-shadow">
-        <h6><strong>{{event.event_name}}</strong>   {{event.event_date}}</h6>
-        <img src="/static/images/{{event.event_image}}" name="event_image" height="100" alt="Image preview...">
+     <h6><strong>{{event.event_name}}</strong>   {{event.event_date}}</h6>
+     <img src="/static/images/{{event.event_image}}" name="event_image" height="100" alt="Image preview...">
+
+      <!-- Show and edit a spesific private event -->
         <button onclick="displayEvent({{event.event_id}})" class="btn btn-info btn-sm">edit</button>
         <div id={{event.event_id}} style=display:none class=hidden>
         <form action="{{ url_for('updatePrivateEventInfo') }}" method="POST">
@@ -32,6 +35,8 @@
             </div>
             <br>
             <div>
+
+                  <!-- List event types and its image -->
                 <label for="event_image">Image:</label>
                 <select name="event_image" required>
                         <option value="birthday.png">Birthday</option>

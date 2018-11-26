@@ -1,0 +1,92 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div id="events">
+    Public Events:
+    <button onclick="displayEvent('newEvent')" class="btn btn-sm">New</button>
+    <div id="newEvent" style=display:none class=hidden>
+        <form action="{{ url_for('createPublicEvent') }}" method="POST">
+            <br/>
+            <div>
+                <label for="event_name">Event name:</label>
+                <input type="text" name="event_name" id="name" size="30" required>
+            </div>
+            <div>
+                <label for="date">Date:</label>
+                <input type="date" name="event_date" id="date" size="30" required>
+            </div>
+            <div>
+                <label for="event_description">Event description:</label>
+                <textarea name="event_description" id="event_description" style=width:226px rows="7" required></textarea>
+            </div>
+            <div>
+                <label for="event_facebook_link">Facebook event link:</label>
+                <input type="text" name="event_facebook_link" id="event_facebook_link" size="30">
+            </div>
+            <br>
+            <label for="event_image">Image:</label>
+            <select name="event_image" required>
+                <option value="easter.jpg">Easter#1</option>
+                <option value="29_February.jpg">29.February#1</option>
+                <option value="mexican.png">Mexican#1</option>
+                <option value="NewYears.jpg">New Year#1</option>
+                <option value="Pizza.jpg">Pizza#1</option>
+                <option value="x_mas.jpg">X-mas#1</option>
+            </select>
+            <br>
+            <input type="hidden" name="publicEvents" value="NULL"/>
+            <button type="action" class="btn btn-success btn-sm">Create</button>
+        </form>    
+    </div>
+   
+
+    <ul id="events_list">
+    {% for event in publicEvents %}
+    <div class="card mb-4 box-shadow">
+        <h6><strong>{{event.event_name}}</strong>   {{event.event_date}}</h6>
+        <button onclick="displayEvent({{event.event_id}})" class="btn btn-info btn-sm">edit</button>
+        <div id={{event.event_id}} style=display:none class=hidden>
+        <form action="{{ url_for('updateEventInfo') }}" method="POST">
+            <br/>
+            <div>
+                <label for="event_name">Event name:</label>
+                <input type="text" name="event_name" id="name" size="30" value="{{event.event_name}}" required>
+            </div>
+            <div>
+                <label for="date">Date:</label>
+                <input type="date" name="event_date" id="date" size="30" value="{{event.event_date}}" required>
+            </div>
+            <div>
+                <label for="event_description">Event description:</label>
+                <textarea name="event_description" id="event_description" style=width:226px rows="7" required>{{event.event_description}}</textarea>
+            </div>
+            <div>
+                <label for="event_facebook_link">Facebook event link:</label>
+                <input type="text" name="event_facebook_link" id="event_facebook_link" size="30" value="{{event.event_facebook_link}}" >
+            </div>
+            <br>
+            <div>
+                <label for="event_image">Image:</label>
+                <select name="event_image" required>
+                    <option value="easter.jpg">Easter#1</option>
+                    <option value="29_February.jpg">29.February#1</option>
+                    <option value="mexican.png">Mexican#1</option>
+                    <option value="NewYears.jpg">New Year#1</option>
+                    <option value="Pizza.jpg">Pizza#1</option>
+                    <option value="x_mas.jpg">X-mas#1</option>
+                </select>
+                <img src="/static/images/{{event.event_image}}" name="event_image" height="100" alt="Image preview...">
+            </div>
+            <input type="hidden" name="publicEvents" value="{{event.publicEvents}}"/>
+            <input type="hidden" name="event_id" value="{{event.event_id}}"/>
+            <button type="action" class="btn btn-success btn-sm">Save</button>
+        </form>
+        </div>
+        <form action="{{url_for('deleteEvent', event_id=event.event_id) }}">
+            <button type="action" class="btn btn-danger btn-sm">delete</button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

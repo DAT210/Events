@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="js/w3.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Bootstrap CSS -->
+
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+      <script src="js/events.js"></script>
+      <script>
+
+		  function start() {
+
+ $("#yes").hide();
+ $("#no").hide();
+ 
+}  	  
+
+
+
+	  function checkDate() {
+	  
+		var GivenDate = document.getElementById("date-input").value;;
+		var CurrentDate = new Date();
+		GivenDate = new Date(GivenDate);
+		
+		if(GivenDate > CurrentDate){
+    $("#yes").show();
+	 $("#no").hide();
+}else{
+     $("#no").show();
+	  $("#yes").hide();
+}
+
+
+
+ 
+}
+</script>
+
+  </head>
+  <body onload="start()">
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+      
+      
+      <div class="container-fluid">
+
+      
+          <div class="card text-center"  style="width: 100%;">
+
+  <div class="card-body">
+   </p><p>Choose a date and check if vit is avaibale!</p>
+  
+              
+  
+          
+          <div class="form-group row">
+  <label for="example-date-input" class="col-1 col-form-label"></label>
+  <div class="col-10">
+    <input class="form-control" type="date"  id="date-input">
+  </div>
+</div>
+                   <a class="btn btn-primary btn-lg" onclick="checkDate()" role="button">check availability</a> 
+				  
+				 
+        </div>  
+          <div class="list-group">
+              
+              <a href="#" class="list-group-item list-group-item-action list-group-item-success"  id="yes" >Yes! this date is available!   <span class="badge badge-primary badge-pill">14pers</span> 
+             
+              
+              <form >
+  <div  class="form-row align-items-center">
+    <div class="col-auto">
+      <label class="sr-only" for="inlineFormInput">Name</label>
+      <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Full name">
+    </div>
+    <div class="col-auto">
+      <label class="sr-only" for="inlineFormInputGroup">name</label>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">@</div>
+        </div>
+        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Email">
+      </div>
+    </div>
+          <div class="col-auto">
+      <label class="sr-only" for="inlineFormInputGroup">Your email</label>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">#</div>
+        </div>
+        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Mobil nr">
+      </div>
+    </div>
+      
+           <div class="form-check mb-2">
+      <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+        <option selected>Choose...</option>
+        <option value="1">Birthday party</option>
+        <option value="2">Event type2 </option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+      <div class="col-auto">
+       
+      <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+        <option selected>How many persons?</option>
+        <option value="1">1</option>
+        <option value="2">2 </option>
+        <option value="3">3</option>
+      </select>
+    </div>
+        
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary mb-2">Book</button>
+    </div>
+  </div>
+</form>
+                  
+              
+              
+              </a>
+              
+              <a id="no"  href="#" class="list-group-item list-group-item-action list-group-item-danger">Sorry, this date is not available! try another date</a>
+              </div>
+</div>
+          
+</div>
+
+  </body>
+</html>

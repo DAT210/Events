@@ -5,10 +5,12 @@ from flask.cli import with_appcontext
 import mysql.connector
 import click
 
+# db config:
 DB_USER="root"
 DB_PSWRD="root"
 DB_DATABASE="events_db"
 
+# Connect to db:
 def get_db(main_db=DB_DATABASE, active_db=True):
 	if not active_db:
 			main_db = ""

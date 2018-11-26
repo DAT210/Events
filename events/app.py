@@ -29,29 +29,42 @@ app.register_blueprint(api.bp)
 def booking():
     return render_template("eventbooking.html")
 
-@app.route('/demo')
-def bookingtest():
-    return render_template("eventbooking_demo.html")
+#Frontend 
+@app.route('/')
+def frontend():
+	events = event.getPublicEvents()
+	pEvents = event.getPrivateEvents()
+	return render_template("frontend.html", events=events , pEvents=pEvents)
 
-@app.route("/show-events")
+
+#This shows booking confirmation
+@app.route('/confirm')
+def confirm():
+    return render_template("confirm.html")
+
+
+#Shows admin website with a top menu
+@app.route("/admin")
 def showEvents():
 	events = event.getPublicEvents()
 	pEvents = event.getPrivateEvents()
 	return render_template("show-events.html", events=events , pEvents=pEvents)
 
+#Show private events. 
 @app.route("/show-private-events")
 def showPEvents():
 	events = event.getPublicEvents()
 	pEvents = event.getPrivateEvents()
 	return render_template("show_p_events.html", events=events , pEvents=pEvents)
 
+#Edit public events. 
 @app.route("/edit-events")
 def editEvents():
 	publicEvents = event.getPublicEvents()
 	privateEvents = event.getPrivateEvents()
 	return render_template("edit-events.html", publicEvents=publicEvents, privateEvents=privateEvents)
 
-
+#Edit private events. 
 @app.route("/edit-private-events")
 def editPEvents():
 	publicEvents = event.getPublicEvents()
@@ -59,7 +72,7 @@ def editPEvents():
 	return render_template("edit_private_events.html", publicEvents=publicEvents, privateEvents=privateEvents)
 
 
-
+#Save public event to database. Then return to admin 
 @app.route("/create-public-event", methods=["POST"])
 def createPublicEvent():
 	publicEvent = request.form.get("publicEvent")
@@ -71,6 +84,9 @@ def createPublicEvent():
 	event.add(publicEvent, event_date, event_name, event_description, event_facebook_link, event_image)
 	return editEvents()
 
+
+
+#Save private event from form to database. Then return to admin 
 @app.route("/create-private-event", methods=["POST"])
 def createPrivateEvent():
 	publicEvent = "No"
@@ -80,13 +96,18 @@ def createPrivateEvent():
 	event_facebook_link = request.form.get("event_facebook_link")
 	event_image = request.form.get("event_image")
 	event.add(publicEvent, event_date, event_name, event_description, event_facebook_link, event_image)
-	return editPEvents()
+	return confirm()
 
+
+
+#delete event by ID 
 @app.route("/deleteEvent/<int:event_id>")
 def deleteEvent(event_id):
 	event.remove(event_id)
 	return editEvents()
 
+
+#Update public event 
 @app.route("/updateEventInfo", methods=["POST"])
 def updateEventInfo():
 	event_id = request.form.get("event_id")
@@ -99,6 +120,7 @@ def updateEventInfo():
 	event.set(event_id, publicEvent, event_date, event_name, event_description, event_facebook_link, event_image)
 	return editEvents()
 
+#Update private event info
 @app.route("/updateEventInfo", methods=["POST"])
 def updatePrivateEventInfo():
 	event_id = request.form.get("event_id")
@@ -110,8 +132,6 @@ def updatePrivateEventInfo():
 	event_image = request.form.get("event_image")
 	event.set(event_id, publicEvent, event_date, event_name, event_description, event_facebook_link, event_image)
 	return editPEvents()
-
-
 
 
 if __name__ == '__main__':

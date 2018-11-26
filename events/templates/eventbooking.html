@@ -14,6 +14,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
  <!-- Bootstrap CSS -->
 
+
+
+   <!-- Check the date using API and stor the results in Busy_date -->
 <script>
 var xmlhttp = new XMLHttpRequest();
 var url = "/api/1.0/events/date/";
@@ -27,7 +30,7 @@ function myFunction(response) {
   var arr = JSON.parse(response);
   var i;
   var Busy_date = arr[0].date_busy;
-
+//if date is busy, show a message, if now, show a form to book the date
   if(Busy_date== "False"){
               $("#yes").show();
               $("#no").hide();
@@ -36,7 +39,7 @@ function myFunction(response) {
                 $("#yes").hide();
 }
     }
-        
+//Hide div's on start        
 function start() {
   $("#yes").hide();
   $("#no").hide(); }  	  
@@ -49,53 +52,15 @@ xmlhttp.open("GET", url, true);
 xmlhttp.send();
                 }
 
-function sendJson() {
-       var http = new XMLHttpRequest();
-            var url = "API_URL.php";
-          var x = document.forms[0];
-               var xstr = "";
-              var ta ="";
-         var tb ="";
-     var i;
-    for (i = 0; i < x.length; i++) {
-if (i==0){ta = x.elements[i].name+"="+ x.elements[i].value;}else{
-tb = tb+"&"+ x.elements[i].name +"=" + x.elements[i].value;
-  } }
 
-xstr = ta+tb;
-http.open("POST", url, true);
-http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-http.onreadystatechange = function() {
-if(http.readyState == 4 && http.status == 200) {
-
-// do whatever you want to with the html output response here
-
-     } 
-
-    }
- http.send(xstr);
-
-   }
 </script>
-
-
-
   </head>
   <body onload="start()">
-
-      
-      <div class="container-fluid">
-
-      
-          <div class="card text-center"  style="width: 100%;">
-
+<div class="container-fluid">     
+  <div class="card text-center"  style="width: 100%;">
   <div class="card-body">
-    <!--   <p class="card-text">We hear you have an event coming up, way to go! This calls for a celebration, and everyone’s invited! We've got just the party package for the occasion: -->
-
-     
-
-
+   
+ <!-- Date and checkDate -->
  </p><p>Choose a date and check if vit is avaibale!</p>
  <form action="{{ url_for('createPrivateEvent') }}" method="POST">    
           <div class="form-group row">
@@ -104,16 +69,12 @@ if(http.readyState == 4 && http.status == 200) {
     <input class="form-control" type="date" name="event_date" id="date" >
   </div>
 </div>
-                   <a class="btn btn-primary btn-lg" onclick="checkDate()" role="button">check availability</a> 
-				  			 
-  </div>  
+   <a class="btn btn-primary btn-lg" onclick="checkDate()" role="button">check availability</a> 
+</div>  
   <div class="list-group">
-              
+  <!-- Booking form -->             
  <a href="#" class="list-group-item list-group-item-action list-group-item-success"  id="yes" >Yes! this date is available!   
-             
-              
-
-  <div  class="form-row align-items-center">
+   <div  class="form-row align-items-center">
     <div class="col-auto">
       <label class="sr-only" for="inlineFormInput">Name</label>
       <input type="text" class="form-control mb-2" name="event_name" id="name" placeholder="Full name">
@@ -157,8 +118,6 @@ if(http.readyState == 4 && http.status == 200) {
         <textarea name="event_description" id="event_description" style=width:226px rows="7" required></textarea>
     </div>
 
-
-  
     <div class="col-auto">
       <button  type="submit" class="btn btn-success mb-2">Book</button>
     </div>

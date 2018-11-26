@@ -1,7 +1,7 @@
 import mysql.connector
 import db
 from flask import render_template
-
+# Save event to db:
 def set(event_id, publicEvent, event_date, event_name, event_description, event_facebook_link, event_image):
 	database = db.get_db()
 	cursor = database.cursor()
@@ -17,7 +17,7 @@ def set(event_id, publicEvent, event_date, event_name, event_description, event_
 	finally:
 		cursor.close()
 	return
-
+# Get event from db:
 def pull():
 	database = db.get_db()
 	cursor = database.cursor()
@@ -42,6 +42,7 @@ def pull():
 		cursor.close()
 	return
 
+# Get event by ID from db:
 def get(id):
 	database = db.get_db()
 	cursor = database.cursor()
@@ -58,6 +59,7 @@ def get(id):
 		cursor.close()
 	return
 
+# Remove event from db by ID:
 def remove(id):
 	database = db.get_db()
 	cursor = database.cursor()
@@ -71,6 +73,8 @@ def remove(id):
 		cursor.close()
 	return
 
+
+# Add event to db :
 def add(publicEvent, event_date, event_name, event_description, event_facebook_link, event_image):
 	database = db.get_db()
 	cursor = database.cursor()
@@ -84,6 +88,7 @@ def add(publicEvent, event_date, event_name, event_description, event_facebook_l
 		cursor.close()
 	return
 
+# Get public event from db:
 def getPublicEvents():
 	allEvents = pull()
 	publicEvents = []
@@ -92,6 +97,8 @@ def getPublicEvents():
 			publicEvents.append(event2)
 	return publicEvents
 
+
+# Get private event from db:
 def getPrivateEvents():
 	allEvents= pull()
 	privateEvents = []
@@ -100,26 +107,7 @@ def getPrivateEvents():
 			privateEvents.append(event2)
 	return privateEvents
 
-def get2(id):
-	database = db.get_db()
-	cursor = database.cursor()
-	try:
-		cursor.execute("LOCK TABLES events READ;")
-		sql = "SELECT * FROM events WHERE event_id=%s;"
-		cursor.execute(sql, (id,))
-		result = cursor.fetchone()
-		cursor.execute("UNLOCK TABLES;")
-		if result is not None:
-			(publicEvent, event_date, event_name, rating_2, event_description,) = result
-			result = (publicEvent, event_date, event_name, rating_2, event_description)
-		return result
-	except mysql.connector.Error as err:
-		return err
-	finally:
-		cursor.close()
-	return
-
-
+# Get private event from database using ID :
 def pullById(id):
 	database = db.get_db()
 	cursor = database.cursor()
@@ -144,6 +132,8 @@ def pullById(id):
 		cursor.close()
 	return
 
+
+# Get private event from database using a DATE. If not found, show json with statue date_busy:fasle :
 def getByDate(id):
 	database = db.get_db()
 	cursor = database.cursor()

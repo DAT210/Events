@@ -5,15 +5,13 @@ import event, db
 
 bp = Blueprint('api',__name__,url_prefix='/api/1.0')
 
-# Blueprints:
+# Blueprints: . Test
 @bp.route('/test', methods=['GET'])
 def test():
 	reply = {
 		'status': "Success",
 		'data': {
-			'id': 'test_id',
-			'rating': 5,
-			'description': "The id test_id has a rating of 5 stars."
+			'id': 'test_id'
 		}
 	}
 
@@ -27,6 +25,7 @@ def set_event_id():
 		event.set(event_id, publicEvent, event_date, event_name, event_description, event_facebook_link, event_image)
 	return jsonify({'ok': 'success'})
 
+#Get API by event ID
 @bp.route('/events/<string:event_id>/', methods=['GET'])
 @bp.route('/events/<string:event_id>', methods=['GET'])
 def get(event_id):
@@ -35,14 +34,15 @@ def get(event_id):
 		abort(400)
 	return jsonify(Event)
 
-
+#Get API by event Date, Fomrat /events/date/YYYYMMDD. URL 
 @bp.route('/events/date/<string:event_date>/', methods=['GET'])
 @bp.route('/events/date/<string:event_date>', methods=['GET'])
 def getByDate(event_date):
 	Event = event.getByDate(event_date)
 	return jsonify(Event)
 	
-
+#Get all events
+@bp.route('/events/', methods=['GET'])
 @bp.route('/events', methods=['GET'])
 def get_events():
 	Event = event.pull()
