@@ -104,7 +104,7 @@ def createPrivateEvent():
 @app.route("/deleteEvent/<int:event_id>")
 def deleteEvent(event_id):
 	event.remove(event_id)
-	return editEvents()
+	return showEvents()
 
 
 #Update public event 

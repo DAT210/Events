@@ -10,7 +10,7 @@ def set(event_id, publicEvent, event_date, event_name, event_description, event_
 			UPDATE events 
 			SET publicEvent=%s, event_date=%s, event_name=%s, event_description=%s, event_facebook_link=%s, event_image=%s
 			WHERE event_id=%s
-		""",(publicEvent, event_date, event_name, event_description, event_id, event_facebook_link, event_image))
+		""",(publicEvent, event_date, event_name, event_description, event_facebook_link, event_image, event_id))
 		database.commit()
 	except db.mysql.connector.Error as err:
 		print(f"Error_set: {err}")
