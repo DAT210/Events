@@ -375,8 +375,17 @@ If you are getting some errors in Docker, here are som usefull commands that you
 
 ##### Delete all containers
     docker rm $(docker ps -a -q)
+
+    kill all running containers with docker kill $(docker ps -q)
+delete all stopped containers with docker rm $(docker ps -a -q)
+delete all images with docker rmi $(docker images -q)  
+
 ##### Delete all images
     docker rmi $(docker images -q)
+
+kill all running containers with docker kill $(docker ps -q)
+delete all stopped containers with docker rm $(docker ps -a -q)
+delete all images with docker rmi $(docker images -q)  
 ##### Run: 
     docker-compose up --build
 

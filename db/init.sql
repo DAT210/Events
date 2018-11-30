@@ -15,14 +15,6 @@ grant all privileges on *.* to 'root'@'%' with grant option;
 DROP TABLE IF EXISTS events;
 
 -- Creates the events table for events:
-CREATE TABLE events2 (
-  event2_id int(10) NOT NULL,
-  user_id int (10) unsigned NOT NULL,
-  event_date int(10) unsigned NOT NULL,
-  meny_id int(10) unsigned NOT NULL,
-  PRIMARY KEY (event2_id),
-  UNIQUE KEY event_id_UNIQUE (event2_id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE events (
   event_id MEDIUMINT NOT NULL AUTO_INCREMENT,
