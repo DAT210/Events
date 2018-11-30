@@ -12,3 +12,4 @@ EXPOSE 80
 
 
 CMD [ "python", "events/app.py" ]
+
