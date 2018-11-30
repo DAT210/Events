@@ -1,14 +1,6 @@
-FROM python:3.7-alpine
-
-LABEL maintainer="Group-3 - Events"
-
 WORKDIR /home/Events
-COPY requirements.txt ./
-COPY events events
-
-RUN pip install --trusted-host pypi.python.org -r requirements.txt
-
-EXPOSE 80
-
-
-CMD [ "python", "events/app.py" ]
+COPY requirements.txt ./	COPY requirements.txt ./
+COPY events events	COPY events events
+COPY app.py config.py app.py ./	
+ RUN pip install --trusted-host pypi.python.org -r requirements.txt	RUN pip install --trusted-host pypi.python.org -r requirements.txt
+ EXPOSE 80	EXPOSE 80
